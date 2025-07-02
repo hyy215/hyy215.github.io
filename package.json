@@ -1,0 +1,25 @@
+{
+  "name": "h-blog",
+  "description": "H’s Blog.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "docs:build": "vuepress-vite build blog",
+    "docs:clean-dev": "vuepress-vite dev blog --clean-cache",
+    "docs:dev": "vuepress-vite dev blog",
+    "docs:update-package": "pnpm dlx vp-update"
+  },
+  "devDependencies": {
+    "@vuepress/bundler-vite": "2.0.0-rc.23",
+    "sass-embedded": "^1.89.2",
+    "vue": "^3.5.16",
+    "vuepress": "2.0.0-rc.23",
+    "vuepress-theme-hope": "2.0.0-rc.93"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
