@@ -1,6 +1,6 @@
 ---
 title: React
-icon: mdi:react
+icon: react
 category:
   - React
 ---

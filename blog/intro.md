@@ -1,6 +1,6 @@
 ---
 date: 2025-07-03
-icon: mdi:face-woman-outline
+icon: face-woman-outline
 category:
   - 博主介绍
 ---
