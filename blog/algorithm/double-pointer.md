@@ -35,7 +35,7 @@ tag:
 
 **动画演示**
 
-![双指针动画演示](/assets/images/double-pointer.gif)
+![双指针动画演示](/assets/images/algorithm/double-pointer.gif)
 
 **代码**
 

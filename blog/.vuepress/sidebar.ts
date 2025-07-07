@@ -38,17 +38,22 @@ export default sidebar({
       link: "react/",
       children: [
         {
-          text: "React 源码解析（一） —— Virtual DOM",
+          text: "React 源码解析",
           icon: "lightbulb-on-outline",
-          link: "react-virtual-dom.html"
+          children: [{
+            text: "Virtual DOM",
+            icon: "alpha-v-box-outline",
+            link: "react-virtual-dom.html",
+          }, {
+            text: "Scheduler",
+            icon: "alpha-s-box-outline",
+            link: "react-scheduler.html"
+          }]
         },{
           text: "React Redux 使用小记",
           icon: "lead-pencil",
           link: "react-redux.html"
-        },{
-        text: "React Scheduler",
-        link: "react-scheduler.html"
-      }],
+        }],
     },
     "intro"
   ],

@@ -42,7 +42,7 @@ tag:
 
 **动画演示**
 
-![最大子序和动画演示](/assets/images/maximum-subarray.gif)
+![最大子序和动画演示](/assets/images/algorithm/maximum-subarray.gif)
 
 **代码**
 

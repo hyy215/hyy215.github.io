@@ -43,7 +43,7 @@ tag:
 
 **动画演示**
 
-![滑动窗口动画演示](/assets/images/sliding-window.gif)
+![滑动窗口动画演示](/assets/images/algorithm/sliding-window.gif)
 
 **代码**
 
