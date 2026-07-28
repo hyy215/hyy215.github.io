@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Directional Stimulus Prompting 与标准提示的摘要结果对比</title>
+  <desc id="desc">输入是一则虚构的社区图书馆公告。Directional Stimulus Prompting 先生成关键词线索，使摘要覆盖开放时间、自习区和编程活动；标准提示生成的摘要遗漏了部分信息。</desc>
+  <defs>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #172033; }
+      .heading { font: 700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #172033; }
+      .label { font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #35415c; }
+      .body { font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #27324a; }
+      .small { font: 15px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #526078; }
+      .keyword { font: 700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif; fill: #8b3d13; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#718096"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" rx="24" fill="#f7f9fc"/>
+  <text x="600" y="48" text-anchor="middle" class="title">实例相关线索如何改善摘要覆盖率</text>
+
+  <rect x="70" y="78" width="1060" height="132" rx="16" fill="#ffffff" stroke="#aab4c5" stroke-width="2"/>
+  <rect x="70" y="78" width="150" height="38" rx="16" fill="#e8eef8"/>
+  <text x="145" y="104" text-anchor="middle" class="label">输入文章</text>
+  <text x="96" y="143" class="body">社区图书馆宣布，自 8 月起将周六闭馆时间从 17:00 延长至 20:00。</text>
+  <text x="96" y="174" class="body">新增时段将开放自习区，并安排两场免费的青少年编程活动。</text>
+
+  <line x1="310" y1="222" x2="310" y2="258" stroke="#718096" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="890" y1="222" x2="890" y2="258" stroke="#718096" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <rect x="55" y="270" width="530" height="390" rx="18" fill="#ffffff" stroke="#4b77be" stroke-width="3"/>
+  <rect x="55" y="270" width="530" height="56" rx="18" fill="#eaf2ff"/>
+  <text x="320" y="306" text-anchor="middle" class="heading">Directional Stimulus Prompting</text>
+
+  <text x="82" y="365" class="label">策略模型生成线索</text>
+  <rect x="82" y="384" width="476" height="64" rx="12" fill="#fff0e5" stroke="#ed9b62"/>
+  <text x="103" y="410" class="keyword">8 月 · 周六 · 延长至 20:00 · 自习区</text>
+  <text x="103" y="434" class="keyword">青少年编程活动</text>
+
+  <line x1="320" y1="458" x2="320" y2="488" stroke="#718096" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="82" y="523" class="label">摘要结果</text>
+  <rect x="82" y="541" width="476" height="88" rx="12" fill="#eaf7ef" stroke="#55a875"/>
+  <text x="103" y="570" class="body">社区图书馆将从 8 月起把周六开放时间</text>
+  <text x="103" y="596" class="body">延长至 20:00，并开放自习区、举办两场</text>
+  <text x="103" y="622" class="body">免费青少年编程活动。</text>
+
+  <rect x="615" y="270" width="530" height="390" rx="18" fill="#ffffff" stroke="#8b95a7" stroke-width="3"/>
+  <rect x="615" y="270" width="530" height="56" rx="18" fill="#eef1f5"/>
+  <text x="880" y="306" text-anchor="middle" class="heading">Standard Prompting</text>
+
+  <text x="642" y="365" class="label">固定任务指令</text>
+  <rect x="642" y="384" width="476" height="64" rx="12" fill="#f3f5f8" stroke="#aab4c5"/>
+  <text x="663" y="422" class="body">请用 2～3 句话概括文章。</text>
+
+  <line x1="880" y1="458" x2="880" y2="488" stroke="#718096" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="642" y="523" class="label">摘要结果</text>
+  <rect x="642" y="541" width="476" height="88" rx="12" fill="#fff4f2" stroke="#d9786e"/>
+  <text x="663" y="576" class="body">社区图书馆将延长周六开放时间，</text>
+  <text x="663" y="604" class="body">为读者提供更多服务。</text>
+  <text x="1096" y="617" text-anchor="end" class="small">遗漏具体活动</text>
+
+  <text x="600" y="696" text-anchor="middle" class="small">虚构示例，仅用于说明 DSP 的工作方式与信息覆盖差异</text>
+</svg>

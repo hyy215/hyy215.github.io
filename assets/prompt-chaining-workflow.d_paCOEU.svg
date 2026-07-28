@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 680" role="img" aria-labelledby="title desc">
+  <title id="title">Prompt Chaining 工作流</title>
+  <desc id="desc">原始文章依次经过事实提取、结构校验、摘要生成和质量检查；校验失败时返回上一步，质量检查发现问题时进入修订并重新检查，最终输出通过检查的摘要。</desc>
+  <defs>
+    <marker id="arrow-dark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      text {
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+        fill: #172033;
+      }
+      .heading { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 19px; fill: #64748b; }
+      .node-title { font-size: 24px; font-weight: 700; }
+      .node-note { font-size: 17px; fill: #475569; }
+      .edge-label { font-size: 17px; font-weight: 600; }
+      .legend { font-size: 17px; fill: #475569; }
+      .arrow {
+        fill: none;
+        stroke: #475569;
+        stroke-width: 4;
+        marker-end: url(#arrow-dark);
+      }
+      .failure {
+        fill: none;
+        stroke: #dc2626;
+        stroke-width: 4;
+        stroke-dasharray: 10 8;
+        marker-end: url(#arrow-red);
+      }
+    </style>
+  </defs>
+
+  <rect width="1440" height="680" rx="28" fill="#f8fafc"/>
+
+  <text x="60" y="68" class="heading">Prompt Chaining：逐步生成、校验与修订</text>
+  <text x="60" y="105" class="subtitle">每个节点只接收完成当前任务所需的信息，应用程序负责传递状态并控制失败路径。</text>
+
+  <!-- Input -->
+  <g filter="url(#shadow)">
+    <rect x="45" y="205" width="190" height="120" rx="20" fill="#ffffff" stroke="#cbd5e1" stroke-width="3"/>
+  </g>
+  <text x="140" y="255" text-anchor="middle" class="node-title">原始文章</text>
+  <text x="140" y="290" text-anchor="middle" class="node-note">任务输入</text>
+
+  <!-- Model: extract -->
+  <g filter="url(#shadow)">
+    <rect x="285" y="205" width="205" height="120" rx="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="3"/>
+  </g>
+  <text x="387.5" y="252" text-anchor="middle" class="node-title">事实提取</text>
+  <text x="387.5" y="287" text-anchor="middle" class="node-note">模型调用</text>
+
+  <!-- Deterministic validation -->
+  <g filter="url(#shadow)">
+    <rect x="540" y="205" width="205" height="120" rx="20" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+  </g>
+  <text x="642.5" y="252" text-anchor="middle" class="node-title">Schema 校验</text>
+  <text x="642.5" y="287" text-anchor="middle" class="node-note">确定性规则</text>
+
+  <!-- Model: draft -->
+  <g filter="url(#shadow)">
+    <rect x="795" y="205" width="205" height="120" rx="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="3"/>
+  </g>
+  <text x="897.5" y="252" text-anchor="middle" class="node-title">摘要生成</text>
+  <text x="897.5" y="287" text-anchor="middle" class="node-note">模型调用</text>
+
+  <!-- Quality gate -->
+  <g filter="url(#shadow)">
+    <rect x="1050" y="205" width="205" height="120" rx="20" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+  </g>
+  <text x="1152.5" y="252" text-anchor="middle" class="node-title">质量检查</text>
+  <text x="1152.5" y="287" text-anchor="middle" class="node-note">事实、长度、遗漏</text>
+
+  <!-- Final output -->
+  <g filter="url(#shadow)">
+    <rect x="1300" y="205" width="105" height="120" rx="20" fill="#dcfce7" stroke="#22c55e" stroke-width="3"/>
+  </g>
+  <text x="1352.5" y="252" text-anchor="middle" class="node-title">最终</text>
+  <text x="1352.5" y="284" text-anchor="middle" class="node-title">摘要</text>
+
+  <!-- Main flow arrows -->
+  <path class="arrow" d="M235 265 H285"/>
+  <path class="arrow" d="M490 265 H540"/>
+  <path class="arrow" d="M745 265 H795"/>
+  <path class="arrow" d="M1000 265 H1050"/>
+  <path class="arrow" d="M1255 265 H1300"/>
+  <text x="1277" y="244" text-anchor="middle" class="edge-label" fill="#16a34a">通过</text>
+
+  <!-- Schema failure loop -->
+  <path class="failure" d="M642.5 325 V395 H387.5 V327"/>
+  <text x="515" y="424" text-anchor="middle" class="edge-label" fill="#dc2626">格式无效，重新提取</text>
+
+  <!-- Revision node and quality loop -->
+  <g filter="url(#shadow)">
+    <rect x="1005" y="470" width="295" height="105" rx="20" fill="#dbeafe" stroke="#3b82f6" stroke-width="3"/>
+  </g>
+  <text x="1152.5" y="513" text-anchor="middle" class="node-title">根据问题修订</text>
+  <text x="1152.5" y="547" text-anchor="middle" class="node-note">模型调用</text>
+  <path class="failure" d="M1108 325 V470"/>
+  <text x="1015" y="405" text-anchor="middle" class="edge-label" fill="#dc2626">未通过</text>
+  <path class="arrow" d="M1300 522 H1360 V385 H1198 V325"/>
+  <text x="1346" y="441" text-anchor="end" class="edge-label" fill="#475569">重新检查</text>
+
+  <!-- Legend -->
+  <g transform="translate(60 625)">
+    <rect x="0" y="-19" width="28" height="28" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="42" y="2" class="legend">模型调用</text>
+
+    <rect x="180" y="-19" width="28" height="28" rx="6" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+    <text x="222" y="2" class="legend">确定性校验</text>
+
+    <line x1="385" y1="-5" x2="435" y2="-5" stroke="#dc2626" stroke-width="4" stroke-dasharray="10 8"/>
+    <text x="450" y="2" class="legend">失败或需修订</text>
+
+    <rect x="660" y="-19" width="28" height="28" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="702" y="2" class="legend">最终输出</text>
+  </g>
+</svg>

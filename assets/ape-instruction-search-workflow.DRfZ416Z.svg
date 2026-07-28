@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-labelledby="title desc">
+  <title id="title">Automatic Prompt Engineer 指令搜索流程</title>
+  <desc id="desc">APE 根据已标注的客服消息生成多个分类指令，在验证数据上执行并评分，保留高分候选，可选择生成语义变体继续搜索，最后选出用于客服分类的指令。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#315ea8"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7652a8"/>
+    </marker>
+    <style>
+      .heading { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172033; }
+      .step { font: 700 18px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #172033; }
+      .body { font: 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4a5870; }
+      .candidate { font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #27364f; }
+      .small { font: 600 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #5b6680; }
+      .line { stroke: #315ea8; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .loop { stroke: #7652a8; stroke-width: 3; stroke-dasharray: 8 7; fill: none; marker-end: url(#arrow-purple); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="660" rx="24" fill="#ffffff"/>
+  <text x="600" y="48" text-anchor="middle" class="heading">Automatic Prompt Engineer（APE）</text>
+
+  <rect x="45" y="92" width="220" height="184" rx="18" fill="#f1f6ff" stroke="#89a9df" stroke-width="2"/>
+  <text x="155" y="126" text-anchor="middle" class="step">输入—输出示例</text>
+  <rect x="70" y="150" width="170" height="38" rx="8" fill="#ffffff" stroke="#bfd0ec"/>
+  <text x="155" y="175" text-anchor="middle" class="candidate">商品有划痕 → 产品故障</text>
+  <rect x="70" y="198" width="170" height="38" rx="8" fill="#ffffff" stroke="#bfd0ec"/>
+  <text x="155" y="223" text-anchor="middle" class="candidate">快递未更新 → 物流</text>
+  <text x="155" y="256" text-anchor="middle" class="small">已标注客服消息</text>
+
+  <path d="M265 184 H315" class="line"/>
+
+  <rect x="316" y="110" width="190" height="148" rx="18" fill="#e9f2ff" stroke="#5f8bcf" stroke-width="2"/>
+  <text x="411" y="151" text-anchor="middle" class="step">候选生成模型</text>
+  <text x="411" y="183" text-anchor="middle" class="body">根据示例反推任务</text>
+  <text x="411" y="211" text-anchor="middle" class="body">提出多条自然语言指令</text>
+
+  <path d="M506 184 H556" class="line"/>
+
+  <rect x="557" y="88" width="260" height="194" rx="18" fill="#fffaf0" stroke="#d7aa55" stroke-width="2"/>
+  <text x="687" y="124" text-anchor="middle" class="step">候选指令池</text>
+  <rect x="582" y="145" width="210" height="34" rx="7" fill="#ffffff" stroke="#ead4a4"/>
+  <text x="687" y="167" text-anchor="middle" class="candidate">A. 判断客服问题类别</text>
+  <rect x="582" y="188" width="210" height="34" rx="7" fill="#ffffff" stroke="#ead4a4"/>
+  <text x="687" y="210" text-anchor="middle" class="candidate">B. 只输出三个标签之一</text>
+  <rect x="582" y="231" width="210" height="34" rx="7" fill="#fff0ef" stroke="#e0a7a2"/>
+  <text x="687" y="253" text-anchor="middle" class="candidate">C. 总结用户问题</text>
+
+  <path d="M817 184 H867" class="line"/>
+
+  <rect x="868" y="100" width="270" height="168" rx="18" fill="#f2faf6" stroke="#73b496" stroke-width="2"/>
+  <text x="1003" y="138" text-anchor="middle" class="step">目标模型执行与评分</text>
+  <text x="1003" y="172" text-anchor="middle" class="body">在独立验证样本上运行候选</text>
+  <text x="1003" y="201" text-anchor="middle" class="body">计算客服分类准确率</text>
+  <text x="1003" y="235" text-anchor="middle" class="small">A：0.94　B：0.96　C：0.31</text>
+
+  <path d="M1003 268 V336 H808" class="line"/>
+
+  <rect x="582" y="337" width="226" height="126" rx="18" fill="#eaf8f1" stroke="#4f9f79" stroke-width="2"/>
+  <text x="695" y="377" text-anchor="middle" class="step">筛选候选指令</text>
+  <text x="695" y="410" text-anchor="middle" class="body">保留高分候选：A、B</text>
+  <text x="695" y="438" text-anchor="middle" class="body">淘汰偏离任务的候选：C</text>
+
+  <path d="M582 400 H515" class="loop"/>
+
+  <rect x="279" y="337" width="235" height="126" rx="18" fill="#f5f0fb" stroke="#9c7abb" stroke-width="2"/>
+  <text x="396" y="377" text-anchor="middle" class="step">可选：重采样</text>
+  <text x="396" y="410" text-anchor="middle" class="body">围绕高分指令生成</text>
+  <text x="396" y="437" text-anchor="middle" class="body">语义相近的新变体</text>
+
+  <path d="M396 337 V308 Q396 300 420 300 H687 V282" class="loop"/>
+  <text x="531" y="323" text-anchor="middle" class="small">继续搜索</text>
+
+  <path d="M695 463 V516 H838" class="line"/>
+
+  <rect x="839" y="500" width="299" height="110" rx="18" fill="#e5f4eb" stroke="#27855a" stroke-width="2"/>
+  <text x="988" y="541" text-anchor="middle" class="step">最终指令</text>
+  <text x="988" y="570" text-anchor="middle" class="candidate">阅读客服消息，只输出</text>
+  <text x="988" y="592" text-anchor="middle" class="candidate">退款、物流或产品故障。</text>
+
+  <rect x="45" y="516" width="515" height="94" rx="16" fill="#f7f8fb" stroke="#c8cfdb" stroke-width="2"/>
+  <text x="302" y="550" text-anchor="middle" class="step">数据边界</text>
+  <text x="302" y="580" text-anchor="middle" class="body">候选生成数据 ≠ 验证数据 ≠ 最终测试数据</text>
+
+  <text x="600" y="640" text-anchor="middle" class="small">高分只表示符合当前评分标准；仍需检查泛化能力、安全边界与业务适用性</text>
+</svg>
