@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="520" viewBox="0 0 1040 520" role="img" aria-labelledby="title desc">
+  <title id="title">Scheduler 最小堆的树形结构与数组存储</title>
+  <desc id="desc">左侧展示以 13 为堆顶的最小堆，右侧展示对应的数组。父节点的排序值不大于子节点，堆顶是下一个待处理的 Task。</desc>
+  <defs>
+    <style>
+      .heading{font:600 22px system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033;text-anchor:middle}
+      .label{font:16px system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#596579;text-anchor:middle}
+      .value{font:600 20px ui-monospace,SFMono-Regular,Consolas,monospace;fill:#172033;text-anchor:middle;dominant-baseline:middle}
+      .index{font:14px ui-monospace,SFMono-Regular,Consolas,monospace;fill:#697588;text-anchor:middle}
+      .note{font:16px system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#324156;text-anchor:middle}
+      .edge{fill:none;stroke:#9bb9a5;stroke-width:3;stroke-linecap:round}
+      .node{fill:#f2faf4;stroke:#347a52;stroke-width:3}
+      .root{fill:#dff3e5;stroke:#287044;stroke-width:4}
+      .cell{fill:#f8fbf9;stroke:#8db59a;stroke-width:2}
+      .root-cell{fill:#dff3e5;stroke:#287044;stroke-width:3}
+      .panel{fill:#fbfdfb;stroke:#d7e5da;stroke-width:2}
+    </style>
+  </defs>
+
+  <rect width="1040" height="520" rx="18" fill="#ffffff"/>
+  <rect class="panel" x="28" y="24" width="560" height="404" rx="14"/>
+  <rect class="panel" x="612" y="24" width="400" height="404" rx="14"/>
+
+  <text class="heading" x="308" y="62">树形结构</text>
+  <text class="label" x="308" y="88">节点值表示 Task 的 sortIndex</text>
+
+  <g class="edge">
+    <path d="M308 145L190 225"/>
+    <path d="M308 145L426 225"/>
+    <path d="M190 275L118 345"/>
+    <path d="M190 275L238 345"/>
+    <path d="M426 275L378 345"/>
+    <path d="M426 275L498 345"/>
+  </g>
+
+  <g>
+    <circle class="root" cx="308" cy="132" r="38"/>
+    <text class="value" x="308" y="132">13</text>
+    <text class="label" x="308" y="184">堆顶</text>
+
+    <circle class="node" cx="190" cy="238" r="34"/>
+    <text class="value" x="190" y="238">16</text>
+
+    <circle class="node" cx="426" cy="238" r="34"/>
+    <text class="value" x="426" y="238">31</text>
+
+    <circle class="node" cx="118" cy="358" r="34"/>
+    <text class="value" x="118" y="358">41</text>
+
+    <circle class="node" cx="238" cy="358" r="34"/>
+    <text class="value" x="238" y="358">51</text>
+
+    <circle class="node" cx="378" cy="358" r="34"/>
+    <text class="value" x="378" y="358">100</text>
+
+    <circle class="node" cx="498" cy="358" r="34"/>
+    <text class="value" x="498" y="358">115</text>
+  </g>
+
+  <text class="heading" x="812" y="62">数组存储</text>
+  <text class="label" x="812" y="88">父节点 i 的子节点位于 2i + 1 和 2i + 2</text>
+
+  <g transform="translate(640 166)">
+    <g class="index">
+      <text x="25" y="-14">0</text>
+      <text x="75" y="-14">1</text>
+      <text x="125" y="-14">2</text>
+      <text x="175" y="-14">3</text>
+      <text x="225" y="-14">4</text>
+      <text x="275" y="-14">5</text>
+      <text x="325" y="-14">6</text>
+    </g>
+    <rect class="root-cell" x="0" y="0" width="50" height="62" rx="6"/>
+    <rect class="cell" x="50" y="0" width="50" height="62"/>
+    <rect class="cell" x="100" y="0" width="50" height="62"/>
+    <rect class="cell" x="150" y="0" width="50" height="62"/>
+    <rect class="cell" x="200" y="0" width="50" height="62"/>
+    <rect class="cell" x="250" y="0" width="50" height="62"/>
+    <rect class="cell" x="300" y="0" width="50" height="62" rx="6"/>
+    <g class="value">
+      <text x="25" y="31">13</text>
+      <text x="75" y="31">16</text>
+      <text x="125" y="31">31</text>
+      <text x="175" y="31">41</text>
+      <text x="225" y="31">51</text>
+      <text x="275" y="31">100</text>
+      <text x="325" y="31">115</text>
+    </g>
+  </g>
+
+  <text class="note" x="812" y="286">peek() 直接读取索引 0</text>
+  <text class="label" x="812" y="320">无需对整个数组完全排序</text>
+
+  <rect x="184" y="454" width="672" height="42" rx="21" fill="#edf7f0"/>
+  <text class="note" x="520" y="481">比较顺序：sortIndex → id　·　堆顶 = 下一个待处理的 Task</text>
+</svg>

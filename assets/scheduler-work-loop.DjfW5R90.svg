@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1400" viewBox="0 0 1080 1400" role="img" aria-labelledby="title desc">
+  <title id="title">Scheduler 宿主任务与 workLoop 流程</title>
+  <desc id="desc">从安排宿主任务，到 workLoop 执行 taskQueue 中的任务、检查时间片、处理取消与续体，再决定是否继续调度。</desc>
+  <defs>
+    <style>.box{fill:#fff;stroke:#2d4059;stroke-width:2}.decision{fill:#f4f8fc;stroke:#2d4059;stroke-width:2}.accent{fill:#eef7f1;stroke:#347a52;stroke-width:2}.t{font:18px system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033;text-anchor:middle}.code{font:17px ui-monospace,SFMono-Regular,Consolas,monospace;fill:#172033;text-anchor:middle}.edge{fill:none;stroke:#2d4059;stroke-width:2}.hint{font:16px system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526175}</style>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2d4059"/></marker>
+  </defs>
+  <rect width="1080" height="1400" fill="#fff"/>
+
+  <g marker-end="url(#a)" class="edge">
+    <path d="M540 85V120"/>
+    <path d="M540 200V240"/>
+    <path d="M540 320V360"/>
+    <path d="M540 440V470"/>
+    <path d="M540 600V620"/>
+    <path d="M540 780V810"/>
+    <path d="M540 950V980"/>
+    <path d="M540 1090V1120"/>
+    <path d="M540 1240V1265"/>
+
+    <path d="M720 535H790"/>
+    <path d="M340 880H290"/>
+    <path d="M740 700H790"/>
+    <path d="M730 1180H790"/>
+    <path d="M165 910V1265"/>
+    <path d="M390 1305H290"/>
+    <path d="M40 1305H20V535H360"/>
+  </g>
+
+  <rect class="box" x="390" y="20" width="300" height="65" rx="8"/>
+  <text class="code" x="540" y="59">requestHostCallback()</text>
+
+  <rect class="box" x="300" y="120" width="480" height="80" rx="8"/>
+  <text class="t" x="540" y="153">安排宿主任务</text>
+  <text class="code" x="540" y="183">MessageChannel / setImmediate / setTimeout</text>
+
+  <rect class="box" x="350" y="240" width="380" height="80" rx="8"/>
+  <text class="code" x="540" y="274">performWorkUntilDeadline()</text>
+  <text class="t" x="540" y="302">记录本轮 startTime</text>
+
+  <rect class="box" x="380" y="360" width="320" height="80" rx="8"/>
+  <text class="code" x="540" y="394">flushWork(currentTime)</text>
+  <text class="t" x="540" y="422">更新调度状态</text>
+
+  <polygon class="decision" points="540,470 720,535 540,600 360,535"/>
+  <text class="code" x="540" y="529">while (currentTask !== null)</text>
+  <text class="t" x="540" y="558">workLoop 循环条件</text>
+  <text class="hint" x="750" y="520">否</text>
+  <text class="hint" x="557" y="618">是</text>
+
+  <rect class="accent" x="790" y="495" width="250" height="80" rx="8"/>
+  <text class="code" x="915" y="528">return false</text>
+  <text class="t" x="915" y="557">结束调度循环</text>
+
+  <polygon class="decision" points="540,620 740,700 540,780 340,700"/>
+  <text class="t" x="540" y="692">任务未过期且</text>
+  <text class="code" x="540" y="721">shouldYieldToHost()?</text>
+  <text class="hint" x="760" y="684">是：让出</text>
+  <text class="hint" x="557" y="801">否</text>
+
+  <polygon class="decision" points="540,810 740,880 540,950 340,880"/>
+  <text class="code" x="540" y="875">typeof callback</text>
+  <text class="code" x="540" y="904">=== 'function'?</text>
+  <text class="hint" x="300" y="863">否</text>
+  <text class="hint" x="557" y="970">是</text>
+
+  <rect class="box" x="40" y="830" width="250" height="80" rx="8"/>
+  <text class="t" x="165" y="862">任务已取消</text>
+  <text class="code" x="165" y="892">pop(taskQueue)</text>
+
+  <rect class="box" x="350" y="980" width="380" height="110" rx="8"/>
+  <text class="code" x="540" y="1016">callback(didTimeout)</text>
+  <text class="t" x="540" y="1048">callback 执行期间不可被中断</text>
+  <text class="code" x="540" y="1076">刷新 currentTime</text>
+
+  <polygon class="decision" points="540,1120 730,1180 540,1240 350,1180"/>
+  <text class="t" x="540" y="1174">callback 返回</text>
+  <text class="t" x="540" y="1203">续体函数？</text>
+  <text class="hint" x="750" y="1164">是</text>
+  <text class="hint" x="557" y="1261">否</text>
+
+  <rect class="box" x="390" y="1265" width="300" height="80" rx="8"/>
+  <text class="t" x="540" y="1297">移除已完成的任务</text>
+  <text class="code" x="540" y="1327">pop(taskQueue)</text>
+
+  <rect class="box" x="40" y="1265" width="250" height="80" rx="8"/>
+  <text class="t" x="165" y="1297">读取下一个堆顶 Task</text>
+  <text class="code" x="165" y="1327">peek(taskQueue)</text>
+
+  <rect class="accent" x="790" y="650" width="250" height="105" rx="8"/>
+  <text class="code" x="915" y="681">return true</text>
+  <text class="t" x="915" y="710">让出主线程</text>
+  <text class="t" x="915" y="739">安排下一轮宿主任务</text>
+
+  <rect class="accent" x="790" y="1125" width="250" height="115" rx="8"/>
+  <text class="t" x="915" y="1152">保存续体函数</text>
+  <text class="code" x="915" y="1181">callback = continuation</text>
+  <text class="code" x="915" y="1210">return true</text>
+  <text class="t" x="915" y="1233">安排下一轮宿主任务</text>
+
+</svg>
